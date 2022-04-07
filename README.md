@@ -3,12 +3,12 @@
 Make sure the following tools are installed:
 
 * Visual Studio 2017+
+  - `Microsoft.VisualStudio.Workload.NativeDesktop` workload is needed for Desktop C++ development
 * [CMake][]
+  - Command `cmake` should be in `%PATH%`
+  - Verify if `cmake --version` shows version
 
-Make sure `Microsoft.VisualStudio.Workload.NativeDesktop` workload is installed.
-
-**`cmake` should be in `$PATH` / `%PATH%`**.  Verify if `cmake --version`
-displays the version properly.
+If in doubt, run `//verify_tools.py` (requires Python 3.7+).
 
 # Build
 
