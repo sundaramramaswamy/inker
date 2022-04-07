@@ -11,8 +11,7 @@ project(Inker
 add_executable(ink
   src/main.cpp)
 
-# Confirm strictly to C++17.  FlatBuffers needs C++11 or newer.
-# https://cliutils.gitlab.io/modern-cmake/chapters/features/cpp11.html
+# Confirm strictly to C++17
 target_compile_features(ink PUBLIC cxx_std_17)
 set_target_properties(ink PROPERTIES
   CXX_EXTENSIONS OFF
