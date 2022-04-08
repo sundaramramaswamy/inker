@@ -110,7 +110,7 @@ void Window::update() {
 
 void Window::draw() {
   BeginDrawing();
-  ClearBackground(RAYWHITE);
+  ClearBackground(Color{0, 0, 0, 0});
 
   if (event_handler_)
     event_handler_->OnPaint(&view_);

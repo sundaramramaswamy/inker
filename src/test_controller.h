@@ -23,6 +23,7 @@ struct TestController : WindowEventHandler {
   }
 
   void OnPaint(View* v) const override {
+    v->Clear(Color{0xf5, 0xde, 0xb3, 0xff});
     v->DrawText("Hello, world", Vector2{ 20, 20 }, View::FontSize::Medium, RED);
   }
 
