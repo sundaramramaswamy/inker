@@ -11,11 +11,16 @@ enum Modifier : uint8_t {
   RightCtrl    = 1 << 5,
 };
 
+enum Button : uint8_t {
+  Left  = 1 << 0,
+  Right = 1 << 1,
+};
+
 struct MouseEvent {
   Vector2 pos;
   Vector2 delta;
-  MouseButton button;
-  int8_t modifiers;
+  uint8_t buttons;
+  uint8_t modifiers;
 };
 
 struct KeyboardEvent {

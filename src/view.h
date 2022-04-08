@@ -14,6 +14,7 @@ public:
     Huge,
   };
 
+  void Clear(Color c);
   void DrawPixel(float x, float y, Color c);
   void DrawLine(float x1, float y1, float x2, float y2, Color c);
   void DrawRectangle(float left, float top, float width, float height, Color c);

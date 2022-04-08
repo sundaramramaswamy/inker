@@ -24,17 +24,13 @@ uint8_t get_modifiers() {
     (IsKeyDown(KEY_RIGHT_ALT) ? Modifier::RightAlt : Modifier::None);
 }
 
-void Window::update() {
-  if (!event_handler_)
-    return;
-
-  // Check keyboard events
+void Window::dispatch_key_events() {
   while (int k = GetKeyPressed()) {
     // ignore pure modifier presses
     if ((k >= 340) && (k <= 347))
       continue;
 
-    KeyboardEvent ke{k, get_modifiers()};
+    KeyboardEvent ke { k, get_modifiers() };
     keys_down_.insert(k);
     event_handler_->OnKeyPressed(ke);
   }
@@ -47,6 +43,69 @@ void Window::update() {
     else
       ++it;
   }
+}
+
+void Window::dispatch_mouse_events() {
+  if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+    mouse_down_ |= Button::Left;
+    MouseEvent me = {
+      GetMousePosition(),
+      GetMouseDelta(),
+      mouse_down_,
+      get_modifiers()
+    };
+    event_handler_->OnMousePressed(me);
+  }
+  if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+    mouse_down_ &= ~Button::Left;
+    MouseEvent me = {
+      GetMousePosition(),
+      GetMouseDelta(),
+      mouse_down_,
+      get_modifiers()
+    };
+    event_handler_->OnMouseReleased(me);
+  }
+  if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+    mouse_down_ |= Button::Right;
+    MouseEvent me = {
+      GetMousePosition(),
+      GetMouseDelta(),
+      mouse_down_,
+      get_modifiers()
+    };
+    event_handler_->OnMousePressed(me);
+  }
+  if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT)) {
+    mouse_down_ &= ~Button::Right;
+    MouseEvent me = {
+      GetMousePosition(),
+      GetMouseDelta(),
+      mouse_down_,
+      get_modifiers()
+    };
+    event_handler_->OnMouseReleased(me);
+  }
+  if (mouse_down_ > 0) {
+    auto delta = GetMouseDelta();
+    if ((delta.x != 0.f) || (delta.y != 0.f)) {
+      MouseEvent me = {
+        GetMousePosition(),
+        delta,
+        mouse_down_,
+        get_modifiers()
+      };
+      event_handler_->OnMouseDragged(me);
+    }
+  }
+}
+
+void Window::update() {
+  if (!event_handler_)
+    return;
+
+  dispatch_key_events();
+  dispatch_mouse_events();
 }
 
 void Window::draw() {

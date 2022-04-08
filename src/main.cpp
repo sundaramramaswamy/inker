@@ -9,10 +9,20 @@ constexpr int TARGET_FPS = 60;
 
 struct Controller : WindowEventHandler {
   void OnKeyPressed(const KeyboardEvent& e) override {
-    log_it(__func__, e);
+    log_key_event(__func__, e);
   }
   void OnKeyReleased(const KeyboardEvent& e) override {
-    log_it(__func__, e);
+    log_key_event(__func__, e);
+  }
+
+  void OnMousePressed(const MouseEvent& e) override {
+    log_mouse_event(__func__, e);
+  }
+  void OnMouseReleased(const MouseEvent& e) override {
+    log_mouse_event(__func__, e);
+  }
+  void OnMouseDragged(const MouseEvent& e) override {
+    log_mouse_event(__func__, e);
   }
 
   void OnPaint(View* v) const override {
@@ -21,7 +31,12 @@ struct Controller : WindowEventHandler {
 
 private:
 
-  void log_it(std::string_view fn_name, const KeyboardEvent& e) const {
+  void log_mouse_event(std::string_view fn_name, const MouseEvent& e) const {
+    TraceLog(LOG_INFO, "%s: Mouse button: %d, Delta: (%f, %f)",
+             fn_name.data(), e.buttons, e.delta.x, e.delta.y);
+  }
+
+  void log_key_event(std::string_view fn_name, const KeyboardEvent& e) const {
     std::stringstream s;
     if (e.modifiers & Modifier::LeftShift)
       s << "Left Shift, ";
@@ -38,7 +53,8 @@ private:
     auto mods = s.str();
     if (mods.empty())
       mods = "None";
-    TraceLog(LOG_INFO, "%s: Key %d, Modifiers: %s", fn_name.data(), e.keycode, mods.data());
+    TraceLog(LOG_INFO, "%s: Key %d, Modifiers: %s",
+             fn_name.data(), e.keycode, mods.data());
   }
 };
 

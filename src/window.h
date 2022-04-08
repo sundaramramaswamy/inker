@@ -33,8 +33,12 @@ private:
   void update();
   void draw();
 
+  void dispatch_key_events();
+  void dispatch_mouse_events();
+
   WindowEventHandler* event_handler_ = nullptr;
   std::set<int> keys_down_;
+  uint8_t mouse_down_ = 0;
   View view_;
 };
 
