@@ -32,6 +32,11 @@ start build\Inker.sln
 
 In the _Solution Explorer_, right-click `ink` project and click _Set as Startup Project_.
 
+# Code
+
+Add new sources (`.h`/`.cpp`) to `src/` and list them in `//CMakeLists.txt` along with other sources.
+Build in Visual Studio.  It should pick up the changes you made in the CMake script.
+
 
 [CMake]: https://cmake.org/
 [vcpkg]: https://vcpkg.io/en/getting-started.html

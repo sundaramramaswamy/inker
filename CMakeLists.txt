@@ -9,9 +9,10 @@ project(Inker
   LANGUAGES CXX)
 
 add_executable(ink
-  src/main.cpp
-  src/view.cpp
-  src/window.cpp)
+  src/main.cpp src/common.h
+  src/view.cpp src/view.h
+  src/window.cpp src/window.h
+  src/eventing.h)
 
 # Confirm strictly to C++17
 target_compile_features(ink PUBLIC cxx_std_17)
