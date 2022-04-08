@@ -8,7 +8,7 @@ Make sure the following tools are installed:
   - Command `cmake` should be in `%PATH%`
   - Verify if `cmake --version` shows version
 
-If in doubt, run `//verify_tools.py` (requires Python 3.7+).
+If in doubt, run `python3 verify_or_install_tools.py` (requires [Python 3.7+][python3]).
 
 # Build
 
@@ -30,6 +30,8 @@ Open Visual Studio with
 start build\Inker.sln
 ```
 
+In the _Solution Explorer_, right-click `ink` project and click _Set as Startup Project_.
+
 
 [CMake]: https://cmake.org/
 [vcpkg]: https://vcpkg.io/en/getting-started.html
@@ -40,3 +42,4 @@ start build\Inker.sln
 [vcpkg cmake example]: https://vcpkg.io/en/docs/examples/manifest-mode-cmake.html
 [cmake-doc]: https://cmake.org/cmake/help/latest/index.html
 [packages]: https://vcpkg.io/en/packages.html
+[python3]: https://www.python.org/downloads/
