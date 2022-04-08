@@ -19,6 +19,20 @@ void View::DrawCircle(float centre_x, float centre_y, float radius, Color c) {
   DrawCircleV(Vector2{centre_x, centre_y}, radius, c);
 }
 
-void View::DrawText(std::string_view text, Vector2 pos, int font_size, Color c) {
+void View::DrawText(std::string_view text, Vector2 pos, FontSize s, Color c) {
+  int font_size = 20;
+  switch (s) {
+  case FontSize::Small:
+    font_size = 10;
+    break;
+  case FontSize::Medium:
+    break;
+  case FontSize::Large:
+    font_size = 40;
+    break;
+  case FontSize::Huge:
+    font_size = 80;
+  }
+
   ::DrawText(text.data(), static_cast<int>(pos.x), static_cast<int>(pos.y), font_size, c);
 }

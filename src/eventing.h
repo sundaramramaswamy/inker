@@ -1,7 +1,7 @@
 #ifndef __EVENTING_H__
 #define __EVENTING_H__
 
-enum ModifierKey : uint8_t {
+enum Modifier : uint8_t {
   None         = 0,
   LeftShift    = 1 << 0,
   RightShift   = 1 << 1,
@@ -15,12 +15,12 @@ struct MouseEvent {
   Vector2 pos;
   Vector2 delta;
   MouseButton button;
-  ModifierKey mod;
+  int8_t modifiers;
 };
 
 struct KeyboardEvent {
   int keycode;
-  int unicode;  // codepoint
+  uint8_t modifiers;
 };
 
 struct WindowEventHandler {
@@ -32,10 +32,10 @@ struct WindowEventHandler {
 
   // Keyboard Events
   virtual void OnKeyPressed(const KeyboardEvent& e) {}
-  virtual void OnKeyRelease(const KeyboardEvent& e) {}
+  virtual void OnKeyReleased(const KeyboardEvent& e) {}
 
   // Paint Events
-  virtual void OnPaint(View* v) {}
+  virtual void OnPaint(View* v) const {}
 };
 
 #endif  // __EVENTING_H__

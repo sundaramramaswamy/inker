@@ -5,12 +5,12 @@
 #include "view.h"
 #include "eventing.h"
 
+#include <set>
 #include <cstdint>
 
 class Window {
 public:
   void SetEventHandler(WindowEventHandler* h);
-  View* GetView() const;
   void SetTitle(const std::string_view& title);
 
   void Run();
@@ -34,6 +34,7 @@ private:
   void draw();
 
   WindowEventHandler* event_handler_ = nullptr;
+  std::set<int> keys_down_;
   View view_;
 };
 
