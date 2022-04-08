@@ -27,7 +27,7 @@ def install_cmake_if_missing():
         print(f"Downloaded CMake installer to {cmake_inst_path}")
         os.system(f'start {cmake_inst_path}')
     else:
-        print("CMake available in %PATH%")
+        print("CMake available in %PATH%.  Skipping installation.")
 
 def install_vc_workload_if_missing():
     prog_files = os.environ['PROGRAMFILES(X86)']
@@ -56,13 +56,13 @@ def install_vc_workload_if_missing():
         print("Unable to validate VS Installation.\n"
               "Install VS 2017 or later with 'Microsoft.VisualStudio.Workload.NativeDesktop' workload.")
         exit(1)
-    install_path = p2.stdout.decode('UTF-8').strip()
-    print(f"Found Visual Studio {vs_ver} at {install_path}.\n"
-          "Launching installer.  Install if not already installed.")
+    install_path = p2.stdout.strip()
+    print(f"Found Visual Studio {vs_ver} at {install_path.decode('UTF-8')}.\n"
+          "Launching installer.  Install 'Microsoft.VisualStudio.Workload.NativeDesktop' workload if not already installed.")
     setup_path = os.path.join(vc_path, 'setup.exe')
     p = subprocess.run([setup_path, 'modify', '--installPath', install_path,
                         '--add', 'Microsoft.VisualStudio.Workload.NativeDesktop'])
 
 if __name__ == '__main__':
-    install_cmake_if_missing()
     install_vc_workload_if_missing()
+    install_cmake_if_missing()
