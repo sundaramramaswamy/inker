@@ -15,10 +15,10 @@ public:
 
   void Run();
 
-  static Window Create(int width,
-                       int height,
-                       std::string_view title,
-                       int target_fps);
+  static Window* Create(int width,
+                        int height,
+                        std::string_view title,
+                        int target_fps);
   ~Window() = default;
 
   // Non-copyable, immovable
@@ -28,7 +28,7 @@ public:
   Window& operator=(Window&&) = delete;
 
 private:
-  Window(int width, int height);
+  Window(int width, int height, std::string_view title, int target_fps);
 
   void update();
   void draw();

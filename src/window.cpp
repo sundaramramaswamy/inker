@@ -2,17 +2,18 @@
 
 #include <vector>
 
-Window Window::Create(int width,
-                      int height,
-                      std::string_view title,
-                      int target_fps) {
-  InitWindow(width, height, title.data());
-  SetTargetFPS(target_fps);
-  return Window(width, height);
+Window* Window::Create(int width,
+                       int height,
+                       std::string_view title,
+                       int target_fps) {
+  static Window w{width, height, title, target_fps};
+  return &w;
 }
 
-
-Window::Window(int width, int height) : view_{width, height} {
+Window::Window(int width, int height, std::string_view title, int target_fps)
+  : view_{width, height} {
+  InitWindow(width, height, title.data());
+  SetTargetFPS(target_fps);
 }
 
 uint8_t get_modifiers() {
