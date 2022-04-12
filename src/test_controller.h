@@ -1,8 +1,8 @@
 #ifndef __TEST_CONTROLLER__
 #define __TEST_CONTROLLER__
 
-#include "common.h"
-#include "window.h"
+#include "eventing.h"
+#include "view.h"
 
 struct TestController : WindowEventHandler {
   void OnKeyPressed(const KeyboardEvent& e) override {

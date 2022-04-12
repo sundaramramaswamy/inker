@@ -1,7 +1,7 @@
 #ifndef __EVENTING_H__
 #define __EVENTING_H__
 
-#include "view.h"
+class View;
 
 enum Modifier : uint8_t {
   None         = 0,
