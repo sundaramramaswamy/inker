@@ -1,6 +1,8 @@
 #ifndef __EVENTING_H__
 #define __EVENTING_H__
 
+#include "view.h"
+
 enum Modifier : uint8_t {
   None         = 0,
   LeftShift    = 1 << 0,
