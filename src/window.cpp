@@ -87,17 +87,18 @@ void Window::dispatch_mouse_events() {
     };
     event_handler_->OnMouseReleased(me);
   }
-  if (mouse_down_ > 0) {
-    auto delta = GetMouseDelta();
-    if ((delta.x != 0.f) || (delta.y != 0.f)) {
-      MouseEvent me = {
-        GetMousePosition(),
-        delta,
-        mouse_down_,
-        get_modifiers()
-      };
+  auto delta = GetMouseDelta();
+  if ((delta.x != 0.f) || (delta.y != 0.f)) {
+    MouseEvent me = {
+      GetMousePosition(),
+      delta,
+      mouse_down_,
+      get_modifiers()
+    };
+    if (mouse_down_ > 0)
       event_handler_->OnMouseDragged(me);
-    }
+    else
+      event_handler_->OnMouseMoved(me);
   }
 }
 
@@ -125,10 +126,6 @@ void Window::Run() {
     draw();
   }
   CloseWindow();
-}
-
-void Window::SetTitle(const std::string_view& title) {
-  SetWindowTitle(title.data());
 }
 
 void Window::SetEventHandler(WindowEventHandler* h) {

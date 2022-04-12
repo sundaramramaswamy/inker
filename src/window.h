@@ -10,11 +10,13 @@
 
 class Window {
 public:
+  // Set object to handle events on the window
   void SetEventHandler(WindowEventHandler* h);
-  void SetTitle(const std::string_view& title);
 
+  // Start UI eventing loop; keeps running until window closed
   void Run();
 
+  // Named Constructor Idiom
   static Window* Create(int width,
                         int height,
                         std::string_view title,
