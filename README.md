@@ -41,7 +41,7 @@ Build in Visual Studio.  It should pick up the changes you made in the CMake scr
 
 ## Controller/Adapter
 
-The idea is to implement an inking application using [MVA Pattern][] (an extension of [MVC][]).  Refer and use the interfaces in `eventing.h` and `view.h`; implement a `Controller` class which extends/inherits from `WindowEventHandler`.
+The idea is to implement an inking application using [MVA Pattern][] (an extension of [MVC][]).  Refer and use the interfaces in `eventing.h` and `view.h`; implement a `Controller` class which extends/inherits from `WindowEventHandler` -- an interface containing methods like `OnMousePressed`, `OnKeyReleased`, `OnPaint`, etc.
 
 ## Model
 
@@ -56,11 +56,11 @@ Build an ink document (model) using the `OnMousePressed`, `OnMouseDragged` and `
     Point
       A pair of floats (Vector2)
 
-When the user clicks, drags and releases the mouse, you'd get a bunch of points which form one stroke. A document is a collect of such strokes.
+When the user clicks, drags and releases the mouse, you'd get a bunch of points which form one stroke. A document is a collection of such strokes.
 
 ## View
 
-During the `OnPaint(View*)` you'd refer to your document (model) and for every stroke do a bunch of `DrawLine` calls.  This would render the document on to the view.
+During the `OnPaint(View*)` you'd refer to your document (model) and for every stroke do a bunch of `View::DrawLine` calls.  This would render the document on to the view.
 
 ## Files
 
@@ -76,6 +76,16 @@ When the user clicks a stroke with `Ctrl` held down, you can [hit-test][] all th
 
 You can make the document fancy by having strokes of different colours.  It’s up to you define how to switch the pen colour.  One way would be to assign colours to keyboard keys `1` (Black), `2` (Red), `3` (Blue), etc. and switch the colour when the user presses a corresponding key.  You’d store every stroke with a colour in your model.  During render, you’d draw the stroke with `DrawLine`s passing the stroke’s colour as `Color` (which is a collection of four `unsigned char`s).
 
+# C++ Material
+
+* [Spirit of C++][]
+* [C++ Language and Standard Library Reference][cpp-ref]
+  - Keep this open when you’re writing C++ code
+* [C++ Function Parameter Choices -- Cheatsheet][func_param_choices]
+  - Useful to know what parameter type to take in functions
+* [C++ ISO FAQ][]
+  - Very useful when you’ve doubts
+
 
 [CMake]: https://cmake.org/
 [vcpkg]: https://vcpkg.io/en/getting-started.html
@@ -90,3 +100,7 @@ You can make the document fancy by having strokes of different colours.  It’s 
 [MVA Pattern]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93adapter
 [MVC]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
 [hit-test]: https://en.wikipedia.org/wiki/Hit-testing
+[cpp-ref]: https://en.cppreference.com/w/cpp
+[func_param_choices]: https://github.com/legends2k/cpp-param-ref/releases/download/v0.3.1/cpp_param_ref.pdf
+[C++ ISO FAQ]: https://isocpp.org/faq
+[spirit of c++]: https://legends2k.github.io/spirit-of-cpp/
